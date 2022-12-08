@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block body %}
+<style>
+    .modal-contenedor2{
+        opacity: 1;
+        pointer-events: auto;
+    }
+</style>
+    <h1>Inventario</h1>
+    <div class="container d-flex flex-row">
+        {% for producto in productos %}
+        <div class="card contenedor-producto" style="width: 18rem; margin-bottom:25px; margin-right: 25px;">
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre_producto }}</h5>
+                <h5>Precio: ${{producto.precioUnitario}}</h5>
+                <h5>Cantidad: {{producto.unidadesEnStock}}</h5>
+                <p>{{producto.provedor.name}}</p>
+                <a href="" id="open" class="btn btn-primary">Editar</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

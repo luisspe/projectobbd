@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block body %}
+<style>
+    .modal-contenedor{
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .modal-contenedor2{
+        opacity: 0;
+        pointer-events: none;
+    }
+    .modal-contenedor3{
+        opacity: 0;
+        pointer-events: none;
+    }
+    .modal-contenedor4{
+        opacity: 0;
+        pointer-events: none;
+    }
+    .modal-contenedor5{
+        opacity: 0;
+        pointer-events: none;
+    }
+    .modal-contenedor6{
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+{% for entrada in entradas %}
+    
+{% endfor %}
+
+
+
+<div style="width:60% ;" class="">
+    <table style="width:100% ;" class="table table-striped">
+      <thead>
+        <tr class="bg-primary">
+          <th>Fecha</th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+        </tr>
+        {% for entrada in entradas %}
+          <tr class="bg-success">
+            <td>{{entrada.fecha}}</td>
+            <td>{{entrada.producto.nombre_producto}}</td>
+            <td>{{entrada.cantidad}}</td>
+          </tr>
+          
+        {% endfor %}
+        
+       
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

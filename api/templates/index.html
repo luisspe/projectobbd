@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'estilos/index.css' %}">
+</head>
+<body>
+    <style>
+        body{
+            padding: 50px;
+        }
+        footer{
+            position: absolute;
+            bottom: 40px;
+        }
+
+        a{
+            text-decoration: none;
+            margin-right: 10px;
+            color: #333;
+        }
+
+    </style>
+    
+    {% block body %}
+
+    {% endblock %}
+    <div class="modal-contenedor" id="modal_container">
+        <div class="contenedorEditar">
+            <h1>Edita el producto</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <p>Nombre</p>
+                {{form.nombre_producto}}
+                <p>Precio</p>
+                {{form.precioUnitario}}
+                <p>Descripcion</p>
+                {{form.descripcion}}
+                <p>Codigo Barra</p>
+                {{form.codigo_barra}}
+                <p>Modelo</p>
+                {{form.modelo}}
+                <p>Cantidad en stock</p>
+                {{form.unidadesEnStock}}
+                <p>Codigo provedor</p>
+                {{form.provedor}}
+                <button type="submit">Guardar</button>
+                <a href="{% url 'catalogo' %}" type="button" id="close">Cerrar</a>
+            </form>
+            
+            
+        </div>
+    </div>
+
+
+
+    <div class="modal-contenedor2" id="modal_container2">
+        <div class="contenedorEditar2">
+            <h1>Nuevo producto</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{inventarioForm.as_p}}
+                <button type="submit">Guardar</button>
+                <a href="{% url 'catalogo' %}" type="button" id="close">Cerrar</a>
+            </form>
+            
+            
+        </div>
+    </div>
+
+
+    <div class="modal-contenedor4" id="modal_container4">
+        <div class="contenedorEditar4">
+            <h1>Nuevo provedor</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{provedoresForm.as_p}}
+                <button type="submit">Guardar</button>
+                <a href="{% url 'provedores' %}" type="button" id="close">Cerrar</a>
+            </form>
+            
+            
+        </div>
+    </div>
+
+    <div class="modal-contenedor5" id="modal_container5">
+        <div class="contenedorEditar5">
+            <h1>Editar Provedor</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit">Guardar</button>
+                <a href="{% url 'provedores' %}" type="button" id="close">Cerrar</a>
+            </form>
+            
+            
+        </div>
+    </div>
+
+
+    <div class="modal-contenedor3" id="modal_container2">
+        <div class="contenedorEditar3">
+            <h1>Añade una cantidad</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                
+                
+                <input oninput="totalEntrada()" type="number" placeholder="Ingresa una cantidad" name="cantidad" id="cantidad">
+                <button type="submit">Guardar</button>
+                <a href="{% url 'entradas' %}" type="button" id="close">Cerrar</a>
+            </form>
+            
+            
+        </div>
+    </div>
+
+    <div class="modal-contenedor6" id="modal_container6">
+        <div class="contenedorEditar6">
+            <h1>Añade una cantidad para la salida</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                
+                
+                <input oninput="" type="number" placeholder="Ingresa una cantidad" name="cantidad" id="cantidad">
+                <button type="submit">Guardar</button>
+                <a href="{% url 'salidas' %}" type="button" id="close">Cerrar</a>
+            </form>
+            
+            
+        </div>
+    </div>
+
+
+
+
+    
+
+    <footer>
+        <a href="{% url 'catalogo' %}">Catalogo</a><a href="{% url 'entradas' %}">Entradas </a><a href="{% url 'reporte-entradas' %}">Reporte entradas </a><a href="{% url  'reporte-salidas' %}">Reporte Salidas</a><a href="{% url 'salidas' %}">Salidas </a><a href="">Pedidos </a><a href="{% url 'provedores' %}">Provedores </a><a href="">Servicios </a>
+    </footer>
+
+    <script>
+         //const modal_container  = document.getElementById('modal_container');
+        const cerrar = document.getElementById('close');
+        const cerrarNuevoProducto = document.getElementById('close2');
+        const cerrarEntrada = document.getElementById('close3');
+        const caantidad = document.getElementById('cantidad');
+        const unis = document.getElementById('uniStock');
+        
+        const totalEntrada = () =>{
+            console.log((caantidad).value + (unis).value)
+        }
+        //const abrir = document.getElementById('open');
+
+        cerrar.addEventListener('click', () => {
+            console.log('click')
+            modal_container.style.opacity=0;
+            modal_container.style.pointerEvents='none';
+            modal_container.classList.remove('show');
+            modal_container.classList.add('hide');
+        });
+
+        cerrarNuevoProducto.addEventListener('click', () => {
+            console.log('click')
+            modal_container2.style.opacity=0;
+            modal_container2.style.pointerEvents='none';
+            modal_container2.classList.remove('show');
+            modal_container2.classList.add('hide');
+        });
+
+        cerrarEntrada.addEventListener('click', () => {
+            console.log('click')
+            modal_container2.style.opacity=0;
+            modal_container2.style.pointerEvents='none';
+            modal_container2.classList.remove('show');
+            modal_container2.classList.add('hide');
+        });
+    </script>
+</body>
+</html>

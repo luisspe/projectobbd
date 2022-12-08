@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block body %}
+<style>
+    .modal-contenedor{
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .modal-contenedor2{
+        opacity: 0;
+        pointer-events: none;
+    }
+    .modal-contenedor3{
+        opacity: 0;
+        pointer-events: none;
+    }
+    .modal-contenedor4{
+        opacity: 0;
+        pointer-events: none;
+    }
+    .modal-contenedor5{
+        opacity: 0;
+        pointer-events: none;
+    }
+    .modal-contenedor6{
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+    <div class="container d-flex justify-content-between mb-5">
+        <div class="titulo"><h1>Inventario</h1></div>
+        
+    <div>
+        <a href="{% url 'nuevoProducto' %}" class="btn btn-outline-primary" type="" id="openNuevoProducto">Agregar Nuevo Producto</a>
+    </div>
+
+    </div>
+    
+    
+    <div class="container d-flex flex-row">
+        {% for producto in productos %}
+        <div class="card contenedor-producto" style="width: 18rem; margin-bottom:25px; margin-right: 25px;">
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre_producto }}</h5>
+                <h5>Precio: ${{producto.precioUnitario}}</h5>
+                <h5>Cantidad: {{producto.unidadesEnStock}}</h5>
+                <p>{{producto.provedor.name}}</p>
+                <a href="{% url 'editarCatalogo' producto.pk%}" id="open" class="btn btn-primary">Editar</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
